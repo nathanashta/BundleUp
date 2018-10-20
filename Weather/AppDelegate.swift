@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Weather
 //
-//  Created by Chandarong Nuon on 6/10/18.
-//  Copyright © 2018 App Elegant. All rights reserved.
+//  Created by Nathan Ashta and Grant Yolason on 10/20/18.
+//  Copyright © 2018 Nathan Ashta and Grant Yolason. All rights reserved.
 //
 
 import UIKit
