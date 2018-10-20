@@ -14,7 +14,7 @@ import NVActivityIndicatorView
 import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
-
+    @IBOutlet weak var whichClothes: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var dayLabel: UILabel!
     
@@ -31,8 +31,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let apiKey = "87af6f9ac4d62f22fe2949d8ecdaa953"
     let locationManager = CLLocationManager()
     
-    var lat = 0.0
-    var lon = 0.0
+    var lat = 5.0
+    var lon = 5.0
     var activityIndicator: NVActivityIndicatorView!
     
     override func viewDidLoad() {
@@ -57,6 +57,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         setBlueGradientBackground()
     }
@@ -65,6 +66,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let location = locations[0]
         lat = location.coordinate.latitude
         lon = location.coordinate.longitude
+        print("\(lat), \(lon)")
+        lat = 64.00
+        lon = 149.00
+        print("\(lat), \(lon)")
         Alamofire.request("http://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(apiKey)&units=metric").responseJSON {
             response in
             self.activityIndicator.stopAnimating()
@@ -73,12 +78,34 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 let jsonWeather = jsonResponse["weather"].array![0]
                 let jsonTemp = jsonResponse["main"]
                 let iconName = jsonWeather["icon"].stringValue
+                let fahrenheit = Int(round(jsonTemp["temp"].doubleValue*9/5)+32)
+                var clothing = "Wear "
+                if fahrenheit<10{
+                    clothing += "Holy fuck get indoors, how are you not frozen, wear some blubber or something"
+                }else if fahrenheit<20 {
+                    clothing += " gloves and a heavy coat"
+                } else if fahrenheit<32 {
+                    clothing += "a nice warm coat"
+                } else if fahrenheit<45 {
+                    clothing += "A hoodie and pants are sufficient"
+                } else if fahrenheit<55 {
+                    clothing += "A hoodie or long sleeve shirt is fine"
+                } else if fahrenheit<70 {
+                    clothing += "shirt and shorts are probably fine its not that cold"
+                } else if fahrenheit<80 {
+                    clothing += "a tshirt and shorts is the move tbh, its a nice-ass day"
+                } else if fahrenheit>90 {
+                    clothing += "its kinda hot wear light clothes"
+                } else {
+                    clothing += "shit its hot today, honestly don't even wear a shirt"
+                }
                 
+                self.whichClothes.text = clothing
+                    
                 self.locationLabel.text = jsonResponse["name"].stringValue
                 self.conditionImageView.image = UIImage(named: iconName)
                 self.conditionLabel.text = jsonWeather["main"].stringValue
-                self.temperatureLabel.text = "\(Int(round(jsonTemp["temp"].doubleValue*9/5)+32))"
-                
+                self.temperatureLabel.text = "\(fahrenheit)"
                 let date = Date()
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "EEEE"
@@ -100,7 +127,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setBlueGradientBackground(){
-        let topColor = UIColor(red: 95.0/255.0, green: 165.0/255.0, blue: 1.0, alpha: 1.0).cgColor
+        let topColor = UIColor(red: 105.0/255.0, green: 195.0/255.0, blue: 1.0, alpha: 1.0).cgColor
         let bottomColor = UIColor(red: 72.0/255.0, green: 114.0/255.0, blue: 184.0/255.0, alpha: 1.0).cgColor
         gradientLayer.frame = view.bounds
         gradientLayer.colors = [topColor, bottomColor]
