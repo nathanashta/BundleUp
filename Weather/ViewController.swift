@@ -67,9 +67,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         lat = location.coordinate.latitude
         lon = location.coordinate.longitude
         print("\(lat), \(lon)")
-        lat = 64.00
-        lon = 149.00
-        print("\(lat), \(lon)")
         Alamofire.request("http://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(apiKey)&units=metric").responseJSON {
             response in
             self.activityIndicator.stopAnimating()
