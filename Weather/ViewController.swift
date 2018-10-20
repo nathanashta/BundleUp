@@ -47,7 +47,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         activityIndicator.startAnimating()
         if(CLLocationManager.locationServicesEnabled()){
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
         
@@ -61,6 +61,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let location = locations[0]
         lat = location.coordinate.latitude
         lon = location.coordinate.longitude
+        print("\(lat), \(lon)")
         Alamofire.request("http://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(apiKey)&units=metric").responseJSON {
             response in
             self.activityIndicator.stopAnimating()
@@ -96,7 +97,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setBlueGradientBackground(){
-        let topColor = UIColor(red: 95.0/255.0, green: 165.0/255.0, blue: 1.0, alpha: 1.0).cgColor
+        let topColor = UIColor(red: 105.0/255.0, green: 195.0/255.0, blue: 1.0, alpha: 1.0).cgColor
         let bottomColor = UIColor(red: 72.0/255.0, green: 114.0/255.0, blue: 184.0/255.0, alpha: 1.0).cgColor
         gradientLayer.frame = view.bounds
         gradientLayer.colors = [topColor, bottomColor]
