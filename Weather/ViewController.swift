@@ -73,7 +73,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 self.locationLabel.text = jsonResponse["name"].stringValue
                 self.conditionImageView.image = UIImage(named: iconName)
                 self.conditionLabel.text = jsonWeather["main"].stringValue
-                self.temperatureLabel.text = "\(Int(round(jsonTemp["temp"].doubleValue)))"
+                self.temperatureLabel.text = "\(Int(round(jsonTemp["temp"].doubleValue*9/5)+32))"
                 
                 let date = Date()
                 let dateFormatter = DateFormatter()
