@@ -15,6 +15,7 @@ import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var whichClothes: UILabel!
+    @IBOutlet weak var windSpeed: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var dayLabel: UILabel!
     
@@ -64,9 +65,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         lat = location.coordinate.latitude
         lon = location.coordinate.longitude
         print("\(lat), \(lon)")
-        lat = 64.00
-        lon = 149.00
-        print("\(lat), \(lon)")
         Alamofire.request("http://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(apiKey)&units=metric").responseJSON {
             response in
             self.activityIndicator.stopAnimating()
@@ -76,6 +74,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 let jsonTemp = jsonResponse["main"]
                 let iconName = jsonWeather["icon"].stringValue
                 let fahrenheit = Int(round(jsonTemp["temp"].doubleValue*9/5)+32)
+                let wind = jsonResponse["wind"]["speed"]
+                
+                self.windSpeed.text = "Wind speed: \(wind)mph"
                 var clothing = "Wear "
                 if fahrenheit<10{
                     clothing += "Holy fuck get indoors, how are you not frozen, wear some blubber or something"
