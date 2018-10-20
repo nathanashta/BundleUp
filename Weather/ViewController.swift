@@ -15,6 +15,7 @@ import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
+    @IBOutlet weak var windSpeed: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var dayLabel: UILabel!
     
@@ -47,7 +48,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         activityIndicator.startAnimating()
         if(CLLocationManager.locationServicesEnabled()){
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
         
@@ -70,12 +71,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 let jsonWeather = jsonResponse["weather"].array![0]
                 let jsonTemp = jsonResponse["main"]
                 let iconName = jsonWeather["icon"].stringValue
+                //let wind = jsonResponse["wind"]
+                //let speed = wind["speed"]
                 
                 self.locationLabel.text = jsonResponse["name"].stringValue
                 self.conditionImageView.image = UIImage(named: iconName)
                 self.conditionLabel.text = jsonWeather["main"].stringValue
                 self.temperatureLabel.text = "\(Int(round(jsonTemp["temp"].doubleValue*9/5)+32))"
-                
+                //self.windSpeed.text = "\(speed.stringValue)mph"
                 let date = Date()
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "EEEE"
