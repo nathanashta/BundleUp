@@ -24,6 +24,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var backgroundView: UIView!
     
+    @IBOutlet weak var jacketLabel: UILabel!
+    
     let gradientLayer = CAGradientLayer()
     
     let apiKey = "87af6f9ac4d62f22fe2949d8ecdaa953"
@@ -51,6 +53,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
+        
         
     }
     
