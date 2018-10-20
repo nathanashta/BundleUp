@@ -28,10 +28,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let gradientLayer = CAGradientLayer()
     
     let apiKey = "87af6f9ac4d62f22fe2949d8ecdaa953"
-    var lat = 11.344533
-    var lon = 104.33322
-    var activityIndicator: NVActivityIndicatorView!
     let locationManager = CLLocationManager()
+    
+    var lat = 0.0
+    var lon = 0.0
+    var activityIndicator: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
