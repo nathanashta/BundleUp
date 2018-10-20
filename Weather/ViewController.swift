@@ -26,7 +26,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     let gradientLayer = CAGradientLayer()
     
-    let apiKey = "8c1e240150949fb7bfe0bf0503c8a20e"
+    let apiKey = "87af6f9ac4d62f22fe2949d8ecdaa953"
     var lat = 11.344533
     var lon = 104.33322
     var activityIndicator: NVActivityIndicatorView!
