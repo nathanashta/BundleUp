@@ -82,7 +82,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 self.windSpeed.text = "Wind speed: \(wind)mph"
                 var clothing = "Wear "
                 if fahrenheit<10{
-                    clothing += "Holy fuck get indoors, how are you not frozen, wear some blubber or something"
+                    clothing += " some blubber or something, this is cold"
                 }else if fahrenheit<20 {
                     clothing += " gloves and a heavy coat"
                 } else if fahrenheit<32 {
@@ -90,15 +90,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 } else if fahrenheit<45 {
                     clothing += "A hoodie and pants are sufficient"
                 } else if fahrenheit<55 {
-                    clothing += "A hoodie or long sleeve shirt is fine"
+                    clothing += "a hoodie or long sleeve shirt"
                 } else if fahrenheit<70 {
-                    clothing += "shirt and shorts are probably fine its not that cold"
+                    clothing += "shirt and shorts"
                 } else if fahrenheit<80 {
-                    clothing += "a tshirt and shorts is the move tbh, its a nice-ass day"
+                    clothing += "a tshirt and shorts, its a nice day"
                 } else if fahrenheit>90 {
-                    clothing += "its kinda hot wear light clothes"
+                    clothing += " light clothes, it's warm today"
                 } else {
-                    clothing += "shit its hot today, honestly don't even wear a shirt"
+                    clothing += "a tank top or nothing at all, it's scorching hot today"
                 }
                 
                 self.whichClothes.text = clothing
